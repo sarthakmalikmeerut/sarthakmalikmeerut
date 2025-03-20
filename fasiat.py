@@ -1,24 +1,23 @@
 from ultralytics import YOLO
 import cv2
+import multiprocessing
+# import smtplib
 import cvzone
 import urllib.request
 import math
-from twilio.rest import Client
-import keys
 
 
 def fun1():
     # vid = cv2.VideoCapture("C:\\Users\\sarth\\PycharmProjects\\yolo_project\\chlid.mp4")
 
-    vid = cv2.VideoCapture("C:\\Users\\sarth\\PycharmProjects\\yolo_project\\car_fire.mp4")
+    vid = cv2.VideoCapture("car_fire.mp4")
     # vid1 = cv2.VideoCapture("C:\\Users\\sarth\\PycharmProjects\\yolo_project\\car_fire.mp4")
     # vid.set(3, 1280)
     # vid.set(4, 720)
 
     # model = YOLO("C:\\Users\\sarth\\PycharmProjects\\yolo_project\\yolov8l.pt")
-    model = YOLO("C:\\Users\\sarth\\PycharmProjects\\yolo_project\\best.pt")
+    model = YOLO("best.pt")
     names = ['fire', 'smoke']
-
 
     while True:
         success, img = vid.read()
@@ -44,7 +43,11 @@ def fun1():
                 #         from_=keys.twillio_number,
                 #         to=keys.my_num
                 #     )
-
+                # s = smtplib.SMTP('smtp.gmail.com', 465)
+                # s.starttls()
+                # s.login("sarthakmalikmeerut@gmail.com", "doomgqtqjkqoosyc")
+                # message = "your location is jalandhar"
+                # s.sendmail("sarthakmalikmeerut@gmail.com", "sarthakmalikmeerut@gmail.com", message)
                 cls = int(box.cls[0])
 
                 cvzone.putTextRect(img, f'{conf}', (max(0, x1), max(35, y1)))
@@ -52,5 +55,5 @@ def fun1():
         cv2.imshow("image", img)
 
         cv2.waitKey(1)
-
 fun1()
+
